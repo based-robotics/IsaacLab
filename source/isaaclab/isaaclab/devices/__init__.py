@@ -26,3 +26,4 @@ from .openxr import OpenXRDevice, OpenXRDeviceCfg
 from .retargeter_base import RetargeterBase, RetargeterCfg
 from .spacemouse import Se2SpaceMouse, Se2SpaceMouseCfg, Se3SpaceMouse, Se3SpaceMouseCfg
 from .teleop_device_factory import create_teleop_device
+from .omega import Se3Omega6, Se3Omega6Cfg

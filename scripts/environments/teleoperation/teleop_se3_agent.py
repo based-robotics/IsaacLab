@@ -19,7 +19,7 @@ parser.add_argument(
     "--teleop_device",
     type=str,
     default="keyboard",
-    choices=["keyboard", "spacemouse", "gamepad", "handtracking"],
+    choices=["keyboard", "spacemouse", "gamepad", "handtracking", "omega"],
     help="Device for interacting with environment",
 )
 parser.add_argument("--task", type=str, default=None, help="Name of the task.")
@@ -57,7 +57,7 @@ import torch
 
 import omni.log
 
-from isaaclab.devices import Se3Gamepad, Se3GamepadCfg, Se3Keyboard, Se3KeyboardCfg, Se3SpaceMouse, Se3SpaceMouseCfg
+from isaaclab.devices import Se3Gamepad, Se3GamepadCfg, Se3Keyboard, Se3KeyboardCfg, Se3SpaceMouse, Se3SpaceMouseCfg, Se3Omega6, Se3Omega6Cfg
 from isaaclab.devices.openxr import remove_camera_configs
 from isaaclab.devices.teleop_device_factory import create_teleop_device
 from isaaclab.managers import TerminationTermCfg as DoneTerm
@@ -193,6 +193,10 @@ def main() -> None:
             elif args_cli.teleop_device.lower() == "gamepad":
                 teleop_interface = Se3Gamepad(
                     Se3GamepadCfg(pos_sensitivity=0.1 * sensitivity, rot_sensitivity=0.1 * sensitivity)
+                )
+            elif args_cli.teleop_device.lower() == "omega":
+                teleop_interface = Se3Omega6(
+                    Se3Omega6Cfg(pos_sensitivity=20.0 * sensitivity, rot_sensitivity=1.0 * sensitivity)
                 )
             else:
                 omni.log.error(f"Unsupported teleop device: {args_cli.teleop_device}")
